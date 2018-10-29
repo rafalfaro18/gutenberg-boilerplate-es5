@@ -10,8 +10,10 @@ function gutenberg_boilerplate_block() {
         array( 'wp-blocks', 'wp-element' )
     );
 
-    register_block_type( 'gutenberg-boilerplate-es5/hello-world-step-01', array(
-        'editor_script' => 'gutenberg-boilerplate-es5-step01',
-    ) );
+    if( function_exists('register_block_type') ){
+        register_block_type( 'gutenberg-boilerplate-es5/hello-world-step-01', array(
+            'editor_script' => 'gutenberg-boilerplate-es5-step01',
+        ) );
+    }
 }
 add_action( 'init', 'gutenberg_boilerplate_block' );
