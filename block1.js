@@ -1,6 +1,6 @@
 var el = wp.element.createElement,
     registerBlockType = wp.blocks.registerBlockType,
-    blockStyle = { backgroundColor: '#900', color: '#fff', padding: '20px' };
+    RichText = wp.editor.RichText;
 
 registerBlockType( 'gutenberg-boilerplate-es5/hello-world-step-01', {
     title: 'Hello World (Step 1)',
@@ -9,11 +9,39 @@ registerBlockType( 'gutenberg-boilerplate-es5/hello-world-step-01', {
 
     category: 'layout',
 
-    edit: function() {
-        return el( 'p', { style: blockStyle }, 'Hello editor.' );
+    attributes: {
+        content: {
+            type: 'string',
+            source: 'html',
+            selector: 'p',
+        }
     },
 
-    save: function() {
-        return el( 'p', { style: blockStyle }, 'Hello saved content.' );
+    edit: function(props) {
+        var content = props.attributes.content;
+
+        function onChangeContent( newContent ) {
+            props.setAttributes( { content: newContent } );
+        }
+
+        return el(
+            RichText,
+            {
+                tagName: 'p',
+                className: props.className,
+                onChange: onChangeContent,
+                value: content,
+            }
+        );
+    },
+
+    save: function(props) {
+        var content = props.attributes.content;
+
+        return el( RichText.Content, {
+            tagName: 'p',
+            className: props.className,
+            value: content
+        } );
     },
 } );
