@@ -1,11 +1,4 @@
-var el = wp.element.createElement,
-    Fragment = wp.element.Fragment,
-    registerBlockType = wp.blocks.registerBlockType,
-    RichText = wp.editor.RichText,
-    BlockControls = wp.editor.BlockControls,
-    AlignmentToolbar = wp.editor.AlignmentToolbar;
-
-registerBlockType( 'gutenberg-boilerplate-es5/hello-world-step-01', {
+wp.blocks.registerBlockType( 'gutenberg-boilerplate-es5/hello-world-step-01', {
     title: 'Hello World (Step 4)',
 
     icon: 'universal-access-alt',
@@ -36,22 +29,22 @@ registerBlockType( 'gutenberg-boilerplate-es5/hello-world-step-01', {
         }
 
         return (
-            el(
-                Fragment,
+            wp.element.createElement(
+                wp.element.Fragment,
                 null,
-                el(
-                    BlockControls,
+                wp.element.createElement(
+                    wp.editor.BlockControls,
                     null,
-                    el(
-                        AlignmentToolbar,
+                    wp.element.createElement(
+                        wp.editor.AlignmentToolbar,
                         {
                             value: alignment,
                             onChange: onChangeAlignment,
                         }
                     )
                 ),
-                el(
-                    RichText,
+                wp.element.createElement(
+                    wp.editor.RichText,
                     {
                         key: 'editable',
                         tagName: 'p',
@@ -69,7 +62,7 @@ registerBlockType( 'gutenberg-boilerplate-es5/hello-world-step-01', {
         var content = props.attributes.content,
             alignment = props.attributes.alignment;
 
-        return el( RichText.Content, {
+        return wp.element.createElement( wp.editor.RichText.Content, {
             tagName: 'p',
             className: props.className,
             style: { textAlign: alignment },
